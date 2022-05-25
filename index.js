@@ -194,12 +194,7 @@ async function run() {
     });
 
     // Call from My Order Page
-    app.delete("/order/:id", async (req, res) => {
-      const id = req.params.id;
-      const query = { _id: ObjectId(id) };
-      const result = await orderCollection.deleteOne(query);
-      res.send(result);
-    });
+    
 
 
     app.get("/review", async (req, res) => {
@@ -207,8 +202,12 @@ async function run() {
       res.send(reviews);
     });
 
-    
-
+    app.post("/review", async (req, res) => {
+      const review = req.body;
+      const result = await reviewCollection.insertOne(review);
+      res.send(result);
+    });
+  
 
      // call from my profile route
     app.get("/profile/:email", async (req, res) => {
