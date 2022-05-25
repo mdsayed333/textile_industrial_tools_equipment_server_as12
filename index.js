@@ -51,6 +51,9 @@ async function run() {
     const userCollection = client
       .db("textile_industrial_tools")
       .collection("users");
+    const profileCollection = client
+      .db("textile_industrial_tools")
+      .collection("profiles");
 
 
 
@@ -207,6 +210,21 @@ async function run() {
     app.post("/review", async (req, res) => {
       const review = req.body;
       const result = await reviewCollection.insertOne(review);
+      res.send(result);
+    });
+
+
+     // call from my profile route
+    app.get("/profile/:email", async (req, res) => {
+      const email = req.params.email;
+      const filter = { email: email };
+      const profile = await profileCollection.find(filter).toArray();
+      res.send(profile);
+    });
+
+    app.post("/profile", async (req, res) => {
+      const profile = req.body;
+      const result = await profileCollection.insertOne(profile);
       res.send(result);
     });
 
