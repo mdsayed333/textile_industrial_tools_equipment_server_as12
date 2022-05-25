@@ -207,11 +207,7 @@ async function run() {
       res.send(reviews);
     });
 
-    app.post("/review", async (req, res) => {
-      const review = req.body;
-      const result = await reviewCollection.insertOne(review);
-      res.send(result);
-    });
+    
 
 
      // call from my profile route
