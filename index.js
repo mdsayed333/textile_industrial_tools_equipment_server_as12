@@ -112,7 +112,16 @@ async function run() {
       res.send({ admin: isAdmin });
     });
 
-   
+    //  do admin in Dashboard Route (All User) page
+    app.put("/user/admin/:email",  async (req, res) => {
+      const email = req.params.email;
+      const filter = { email: email };
+      const updateDoc = {
+        $set: { role: "admin" },
+      };
+      const result = await userCollection.updateOne(filter, updateDoc);
+      res.send(result);
+    });
 
 
 
