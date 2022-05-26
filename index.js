@@ -178,6 +178,12 @@ async function run() {
       res.send(orders);
     });
 
+    // Call from (Add New Product) Page
+    app.post("/tools", async (req, res) => {
+      const tool = req.body;
+      const result = await toolCollection.insertOne(tool);
+      res.send(result);
+    })
     // Call from My Order Page
     app.get("/orders/:email", async (req, res) => {
       const email = req.params.email;
