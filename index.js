@@ -165,7 +165,12 @@ async function run() {
       res.send(result);
     });
 
-    
+    app.delete("/tools/:id", verifyJWT, verifyAdmin, async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const result = await toolCollection.deleteOne(query);
+      res.send(result);
+    });
 
       // Call from Manage Order Page
     app.get("/orders", async (req, res) => {
